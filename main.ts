@@ -8,5 +8,5 @@ app.use(router.routes());
 app.use(router.allowedMethods());
 
 console.log("Todo en orden YESSSSSSSSSSSSSSSSSS");
-
-await app.listen();
+const port = Number(Deno.env.get("PORT"));
+await app.listen({ port });
