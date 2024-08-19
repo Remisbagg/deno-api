@@ -1,4 +1,5 @@
 // main.ts
+Deno.serve((req: Request) => new Response("Hello Worldd"));
 import { Application } from "./deps.ts";
 import router from "./routes.ts";
 
