@@ -2,8 +2,8 @@
 import { Client } from "./deps.ts";
 
 export const client = await new Client().connect({
-  hostname: "mysql.railway.internal",
+  hostname: "autorack.proxy.rlwy.net",
   username: "root",  
-  db: "baseDeno",
+  db: "railway",
   password: "jiHEYVVCrQUvuYJEEjgoTqWgIEdgSDik", 
 });
