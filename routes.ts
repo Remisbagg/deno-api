@@ -9,6 +9,11 @@ router
     const result = await client.query("SELECT * FROM todos");
     context.response.body = result;
   })
+
+
+  .get("/", (context) => {
+    context.response.body = "API está funcionando correctamente";
+  })
   .get("/todos/:id", async (context) => {
     const id = context.params.id;
     const result = await client.query("SELECT * FROM todos WHERE id = ?", [id]);
