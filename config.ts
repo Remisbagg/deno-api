@@ -2,8 +2,8 @@
 import { Client } from "./deps.ts";
 
 export const client = await new Client().connect({
-  hostname: "localhost",
+  hostname: "mysql.railway.internal",
   username: "root",  
   db: "baseDeno",
-  password: "", 
+  password: "jiHEYVVCrQUvuYJEEjgoTqWgIEdgSDik", 
 });
