@@ -1,2 +1,12 @@
 // main.ts
-Deno.serve((req: Request) => new Response("Hello Worldd"));
+import { Application } from "./deps.ts";
+import router from "./routes.ts";
+
+const app = new Application();
+
+app.use(router.routes());
+app.use(router.allowedMethods());
+
+console.log("Todo en orden YESSSSSSSSSSSSSSSSSS");
+
+await app.listen();
