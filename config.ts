@@ -1,10 +1,9 @@
-// config.ts
 import { Client } from "./deps.ts";
 
 export const client = await new Client().connect({
-  hostname: "autorack.proxy.rlwy.net",
-  port: 18329, // Usa el puerto público proporcionado por Railway
+  hostname: "junction.proxy.rlwy.net",
+  port: 10082,
   username: "root",
-  db: "railway",
-  password: "jiHEYVVCrQUvuYJEEjgoTqWgIEdgSDik",
+  db: "Usuarios",
+  password: "FtpUtKpYAbMLBaTOpOICMYFKHVqeCHlS",
 });

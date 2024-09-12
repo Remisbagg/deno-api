@@ -95,6 +95,63 @@ router
       context.response.body = { message: "Error interno del servidor" };
     }
   })
+
+
+
+  
+  router.post("/users/register", async (context) => {
+    try {
+      const body = await context.request.body({ type: "json" }).value;
+      const { nombre, email, edad, genero, numeroCelular, direccion, password } = body;  // Asegúrate de que coincida con lo enviado
+  
+      if (!nombre || !email || !password) {
+        context.response.status = 400;
+        context.response.body = { message: "Nombre, email, y contraseña son requeridos" };
+        return;
+      }
+  
+      await client.execute(
+        "INSERT INTO RegistroUsuario (NombreUsuario, CorreElectronico, Edad, Genero, NumeroCelular, Direccion, Contraseña) VALUES (?, ?, ?, ?, ?, ?, ?)",
+        [nombre, email, edad, genero, numeroCelular, direccion, password]  // Usa numeroCelular aquí
+      );
+      context.response.status = 201;
+      context.response.body = { message: "Usuario registrado exitosamente" };
+    } catch (error) {
+      console.error("Error al registrar usuario:", error);
+      context.response.status = 500;
+      context.response.body = { message: "Error interno del servidor" };
+    }
+  });  
+  
+  router.post("/users/login", async (context) => {
+    try {
+      const body = await context.request.body({ type: "json" }).value;
+      const { email, password } = body;
+  
+      if (!email || !password) {
+        context.response.status = 400;
+        context.response.body = { message: "Email y contraseña son requeridos" };
+        return;
+      }
+  
+      const result = await client.query(
+        "SELECT * FROM RegistroUsuario WHERE CorreElectronico = ? AND Contraseña = ?",
+        [email, password]
+      );
+  
+      if (result.length > 0) {
+        context.response.status = 200;
+        context.response.body = { message: "Inicio de sesión exitoso", user: result[0] };
+      } else {
+        context.response.status = 401;
+        context.response.body = { message: "Credenciales inválidas" };
+      }
+    } catch (error) {
+      console.error("Error al iniciar sesión:", error);
+      context.response.status = 500;
+      context.response.body = { message: "Error interno del servidor" };
+    }
+  })
   
   .delete("/todos/:id", async (context) => {
     const id = context.params.id;
